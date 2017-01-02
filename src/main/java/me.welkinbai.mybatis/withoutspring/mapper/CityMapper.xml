@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.welkinbai.mybatis.withoutspring.mapper.CityMapper">
+    <resultMap id="baseResult" type="me.welkinbai.mybatis.withoutspring.domain.City">
+        <id column="ID" property="id"/>
+        <result column="Name" property="name"/>
+        <result column="CountryCode" property="countryCode"/>
+        <result column="District" property="district"/>
+        <result column="Population" property="population"/>
+    </resultMap>
+
+    <sql id="columns">
+        ID,Name,CountryCode,District,Population
+    </sql>
+
+    <select id="selectById" parameterType="int" resultMap="baseResult">
+         SELECT
+         <include refid="columns"/>
+         FROM city
+         WHERE ID = #{id}
+    </select>
+
+    <select id="selectListById" parameterType="int" resultMap="baseResult">
+        SELECT
+        <include refid="columns"/>
+        FROM city
+        WHERE ID > #{id}
+    </select>
+
+    <update id="update" parameterType="me.welkinbai.mybatis.withoutspring.domain.City">
+        UPDATE
+        city
+        SET
+        Name = #{name}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM city
+        WHERE ID = #{id}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        city (<include refid="columns"/>)
+        VALUES (#{id},#{name},#{countryCode},#{district},#{population})
+    </insert>
+</mapper>
