@@ -1,9 +1,11 @@
 package me.welkinbai.mybatis.withoutspring.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by welkinbai on 2016/12/29.
  */
-public class City {
+public class City implements Serializable{
     private Integer id;
     private String name;
     private String countryCode;

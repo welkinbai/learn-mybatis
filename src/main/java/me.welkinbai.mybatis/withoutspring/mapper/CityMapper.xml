@@ -9,6 +9,8 @@
         <result column="Population" property="population"/>
     </resultMap>
 
+    <cache/>
+
     <sql id="columns">
         ID,Name,CountryCode,District,Population
     </sql>
