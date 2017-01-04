@@ -43,7 +43,7 @@
         WHERE ID = #{id}
     </delete>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" useGeneratedKeys="false" keyProperty="id">
         INSERT INTO
         city (<include refid="columns"/>)
         VALUES (#{id},#{name},#{countryCode},#{district},#{population})
