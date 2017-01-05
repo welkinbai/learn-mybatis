@@ -38,7 +38,8 @@ public class SettingsTest {
     * 1.mybatisconfig_test_settings.xml cacheEnabled->false
     * 2.run this unit test and see sql executed twice
     * 3.mybatisconfig_test_settings.xml cacheEnabled->true
-    * 4.run this unit test again and see sql executed once*/
+    * 4.run this unit test again and see sql executed once
+    * */
     @Test
     public void testCloseCache() throws Exception {
         SqlSession sqlSession2;
@@ -61,7 +62,8 @@ public class SettingsTest {
     * 2. change mybatisconfig_test_settings.xml useGeneratedKeys->true
     * 3. run this unit test and see city.getId() return right number. useGeneratedKeys config take effect.
     * 4. add useGeneratedKeys="false" to CityMapper.xml insert
-    * 5. run this unit test again and see useGeneratedKeys in CityMapper.xml cover useGeneratedKeys in mybatisconfig_test_settings.xml*/
+    * 5. run this unit test again and see useGeneratedKeys in CityMapper.xml cover useGeneratedKeys in mybatisconfig_test_settings.xml
+    * */
     @Test
     public void testUseGeneratedKeys() throws Exception {
         try {
@@ -73,6 +75,30 @@ public class SettingsTest {
             city.setDistrict("wuhan");
             cityMapper.insert(city);
             System.out.println(city.getId());
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    /*
+    * 测试方法（steps）：
+    * 1. change mybatisconfig_test_settings.xml autoMappingBehavior->NONE
+    * 2. run this unit test and see result.
+    * 3. change mybatisconfig_test_settings.xml autoMappingBehavior->PARTIAL
+    * 4. run this unit test and see result.
+    * 5. change mybatisconfig_test_settings.xml autoMappingBehavior->FULL
+    * 6. run this unit test and see result.
+    * 7. you can change selectByIdWithoutResultMap and selectByIdWithAssociationResult SQL,resultMap and see what happens
+    * 8. you can add autoMapping="true" into resultMap,and see what happens
+    * */
+    @Test
+    public void testAutoMappingBehavior() throws Exception {
+        try {
+            CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
+            City city = cityMapper.selectByIdWithoutResultMap(1);
+            System.out.println(city);
+            City city2 = cityMapper.selectByIdWithAssociationResult(1);
+            System.out.println(city2);
         } finally {
             sqlSession.close();
         }

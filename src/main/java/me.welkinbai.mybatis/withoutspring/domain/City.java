@@ -11,6 +11,7 @@ public class City implements Serializable{
     private String countryCode;
     private String district;
     private Integer population;
+    private Country country;
 
     public Integer getId() {
         return id;
@@ -50,5 +51,24 @@ public class City implements Serializable{
 
     public void setPopulation(Integer population) {
         this.population = population;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" + "id=" + id +
+                ", name='" + name + '\'' +
+                ", countryCode='" + countryCode + '\'' +
+                ", district='" + district + '\'' +
+                ", population=" + population +
+                ", country=" + country +
+                '}';
     }
 }

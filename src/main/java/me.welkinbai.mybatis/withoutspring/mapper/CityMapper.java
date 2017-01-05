@@ -10,6 +10,10 @@ import java.util.List;
 public interface CityMapper {
     City selectById(Integer id);
 
+    City selectByIdWithoutResultMap(Integer id);
+
+    City selectByIdWithAssociationResult(Integer id);
+
     List<City> selectListById(Integer id);
 
     int update(City newCity);

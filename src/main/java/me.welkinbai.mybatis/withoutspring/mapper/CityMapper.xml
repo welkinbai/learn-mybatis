@@ -9,6 +9,14 @@
         <result column="Population" property="population"/>
     </resultMap>
 
+    <resultMap id="associationResult" type="me.welkinbai.mybatis.withoutspring.domain.City">
+        <result column="Name" property="name"/>
+        <association property="country" resultMap="countryResult"/>
+    </resultMap>
+
+    <resultMap id="countryResult" type="me.welkinbai.mybatis.withoutspring.domain.Country">
+    </resultMap>
+
     <cache/>
 
     <sql id="columns">
@@ -20,6 +28,28 @@
          <include refid="columns"/>
          FROM city
          WHERE ID = #{id}
+    </select>
+
+    <select id="selectByIdWithoutResultMap" parameterType="int" resultType="me.welkinbai.mybatis.withoutspring.domain.City">
+        SELECT
+        c.ID as "id",
+        c.Name as "name",
+        c.CountryCode as "countryCode",
+        c.District as "district",
+        c.Population as "population"
+        FROM city c inner join country co on c.CountryCode = co.Code
+        WHERE c.ID = #{id}
+    </select>
+
+    <select id="selectByIdWithAssociationResult" parameterType="int" resultMap="associationResult">
+        SELECT
+        c.ID as "id",
+        c.Name as "name",
+        c.CountryCode as "countryCode",
+        c.District as "district",
+        c.Population as "population"
+        FROM city c inner join country co on c.CountryCode = co.Code
+        WHERE c.ID = #{id}
     </select>
 
     <select id="selectListById" parameterType="int" resultMap="baseResult">
