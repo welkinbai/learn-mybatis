@@ -104,4 +104,25 @@ public class SettingsTest {
         }
     }
 
+    /*
+    * 测试方法（steps）：
+    * 1. change mybatisconfig_test_settings.xml autoMappingUnknownColumnBehavior->FAILING
+    * 2. run this unit test and see result.
+    * 3. change mybatisconfig_test_settings.xml autoMappingUnknownColumnBehavior->WARNING
+    * 4. run this unit test and see result.
+    * 5. change mybatisconfig_test_settings.xml autoMappingUnknownColumnBehavior->NONE
+    * 6. run this unit test and see result.
+    * */
+    @Test
+    public void testAutoMappingUnknownColumnBehavior() throws Exception {
+        try {
+            CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
+            City city = cityMapper.selectByIdWithUnknownColumnResult(1);
+            System.out.println(city);
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+
 }

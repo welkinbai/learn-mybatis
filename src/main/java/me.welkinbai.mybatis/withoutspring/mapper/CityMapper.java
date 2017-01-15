@@ -14,6 +14,8 @@ public interface CityMapper {
 
     City selectByIdWithAssociationResult(Integer id);
 
+    City selectByIdWithUnknownColumnResult(Integer id);
+
     List<City> selectListById(Integer id);
 
     int update(City newCity);

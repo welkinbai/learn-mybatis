@@ -30,7 +30,7 @@
          WHERE ID = #{id}
     </select>
 
-    <select id="selectByIdWithoutResultMap" parameterType="int" resultType="me.welkinbai.mybatis.withoutspring.domain.City">
+    <select id="selectByIdWithoutResultMap" resultType="me.welkinbai.mybatis.withoutspring.domain.City">
         SELECT
         c.ID as "id",
         c.Name as "name",
@@ -41,10 +41,21 @@
         WHERE c.ID = #{id}
     </select>
 
-    <select id="selectByIdWithAssociationResult" parameterType="int" resultMap="associationResult">
+    <select id="selectByIdWithAssociationResult" resultMap="associationResult">
         SELECT
         c.ID as "id",
         c.Name as "name",
+        c.CountryCode as "countryCode",
+        c.District as "district",
+        c.Population as "population"
+        FROM city c inner join country co on c.CountryCode = co.Code
+        WHERE c.ID = #{id}
+    </select>
+
+    <select id="selectByIdWithUnknownColumnResult" resultType="me.welkinbai.mybatis.withoutspring.domain.City">
+        SELECT
+        c.ID as "id",
+        c.Name as "unknownColumn",
         c.CountryCode as "countryCode",
         c.District as "district",
         c.Population as "population"
