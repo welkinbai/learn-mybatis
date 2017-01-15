@@ -3,6 +3,7 @@ package me.welkinbai.mybatis.withoutspring;
 import me.welkinbai.mybatis.withoutspring.domain.City;
 import me.welkinbai.mybatis.withoutspring.mapper.CityMapper;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -65,6 +66,19 @@ public class StatementTest {
         try {
             CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
             List<City> cities = cityMapper.selectListById(2000);
+            for (City city : cities) {
+                System.out.println(city.getName());
+            }
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
+    public void testSelectListByIdWithRowBounds() throws Exception {
+        try {
+            CityMapper cityMapper = sqlSession.getMapper(CityMapper.class);
+            List<City> cities = cityMapper.selectListByIdWithRowBounds(2000, new RowBounds(0, 20));
             for (City city : cities) {
                 System.out.println(city.getName());
             }

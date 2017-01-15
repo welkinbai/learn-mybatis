@@ -70,6 +70,13 @@
         WHERE ID > #{id}
     </select>
 
+    <select id="selectListByIdWithRowBounds" parameterType="int" resultMap="baseResult">
+        SELECT
+        <include refid="columns"/>
+        FROM city
+        WHERE ID > #{id}
+    </select>
+
     <update id="update" parameterType="me.welkinbai.mybatis.withoutspring.domain.City">
         UPDATE
         city

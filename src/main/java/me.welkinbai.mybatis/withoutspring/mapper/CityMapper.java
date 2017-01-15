@@ -1,6 +1,7 @@
 package me.welkinbai.mybatis.withoutspring.mapper;
 
 import me.welkinbai.mybatis.withoutspring.domain.City;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public interface CityMapper {
     City selectByIdWithUnknownColumnResult(Integer id);
 
     List<City> selectListById(Integer id);
+
+    List<City> selectListByIdWithRowBounds(Integer id, RowBounds rowBounds);
 
     int update(City newCity);
 
