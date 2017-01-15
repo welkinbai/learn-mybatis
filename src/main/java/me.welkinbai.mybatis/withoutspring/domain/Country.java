@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class Country implements Serializable{
 
+    private static final long serialVersionUID = -6939348537294418488L;
+
     private String countryCode;
 
     public String getCountryCode() {

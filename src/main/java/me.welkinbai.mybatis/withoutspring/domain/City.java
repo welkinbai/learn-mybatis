@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by welkinbai on 2016/12/29.
  */
 public class City implements Serializable{
+    private static final long serialVersionUID = -8700105824277357684L;
     private Integer id;
     private String name;
     private String countryCode;
